@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "3561649448",
+    "firebase_url": "https://myapplication-cc603.firebaseio.com",
+    "project_id": "myapplication-cc603",
+    "storage_bucket": "myapplication-cc603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3561649448:android:c2ea2921438546bd",
+        "android_client_info": {
+          "package_name": "com.example.soymilk.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3561649448-lkivo1o90u2blmgb1bu1emjkc4o47doj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.soymilk.myapplication",
+            "certificate_hash": "4ad12175f6ac9f18b4217de8f715f9594c4bf8fd"
+          }
+        },
+        {
+          "client_id": "3561649448-6pf3h4ivi7tau5usk394llupg05pppgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDezSe7lNWEmdMEUOv5zkbEPX10cdoYfgM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3561649448-a114e4kscgcrkvbi71mdikmpolhpr7er.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
