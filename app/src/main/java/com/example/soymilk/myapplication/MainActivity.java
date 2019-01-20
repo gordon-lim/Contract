@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean isGameTaken = dataSnapshot.exists();
-                if(isGameTaken == false){
+                if(!isGameTaken){
                     mRootRef.child(passcode).setValue(game1);
                     joinGame(mRootRef.child(passcode));
 

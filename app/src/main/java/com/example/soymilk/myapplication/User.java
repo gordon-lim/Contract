@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class User {
-    boolean Ended = false;
-    boolean isTaken = false;
-    List<String> myList = Arrays.asList("rocks","my","world");
-    List<String> myGive = Arrays.asList("rocks","my","world");
+    public boolean Ended = false;
+    public boolean isTaken = false;
+    public List<String> myList = Arrays.asList("rocks","my","world");
+    public List<String> myGive = Arrays.asList("rocks","my","world");
 
 
     public User(){}

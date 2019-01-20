@@ -5,18 +5,16 @@ import java.util.List;
 
 public class GameObject {
 
-    User userA = new User();
-    User userB = new User();
-    String passcode = "";
+    public User userA = new User();
+    public User userB = new User();
+    public String passcode = "";
 
     public GameObject(String passcode) {
         this.passcode = passcode;
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public String getPasscode() {
-        return passcode;
-    }
+
 
     /* public boolean isEndedA() {
         return EndedA;
