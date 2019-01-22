@@ -1,7 +1,6 @@
-package com.example.soymilk.myapplication;
+package com.example.soymilk.myapplication.models;
 
-import java.util.Arrays;
-import java.util.List;
+import com.example.soymilk.myapplication.models.User;
 
 public class GameObject {
 

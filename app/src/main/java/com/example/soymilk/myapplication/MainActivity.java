@@ -10,19 +10,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.soymilk.myapplication.models.GameObject;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 
+    /*
+
+    Notes:
+
+    21/1/19: Firebase require your Pojo to have public variables or getter/setter. When I previously did not define the
+    access modifiers, my object could not be added!
+    Refer to link: https://www.learnhowtoprogram.com/android/data-persistence/firebase-writing-pojos
+
+     */
+
+
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef = mRootRef.child("condition");
     DatabaseReference mPassRef = mRootRef.child("GameObject").child("passcode");
     TextView view;
     Button joinButton;
@@ -67,41 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //mRootRef.child(passcode).setValue(game1);
-
-        /* mRootRef.child(passcode).child("userA").child("isTaken").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean isTaken =dataSnapshot.getValue(Boolean.class);
-
-                if (isTaken == false){
-
-                    mRootRef.child(passcode).child("userA").child("isTaken").setValue(true);
-
-                }
-
-                else {
-                    Toast.makeText(getApplicationContext(), "Sorry, passcode taken", Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        }); */
-
-
-
-        //get the User A boolean for is taken
-
-
-
-        //mRootRef.child(passcode).child("userA").child("isTaken").getValue(); //cannot work
-
     }
 
     // Enter a game
@@ -113,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue(Boolean.class) == false){
                     game.child("userA").child("isTaken").setValue(true);
-                    Intent openMyList = new Intent(MainActivity.this, aList.class);
+                    Intent openMyList = new Intent(MainActivity.this, GameActivity.class);
                     openMyList.putExtra("username", "userA");
                     startActivity(openMyList);
                 } else {
@@ -124,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue(Boolean.class) == false){
                                 game.child("userB").child("isTaken").setValue(true);
-                                Intent openMyList = new Intent(MainActivity.this, aList.class);
+                                Intent openMyList = new Intent(MainActivity.this, GameActivity.class);
                                 openMyList.putExtra("username", "userB");
                                 startActivity(openMyList);
                             }
@@ -197,34 +170,12 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-                //Check if the game has a player
-
-
-                //Check if the game has 2 players
-
-                mConditionRef.setValue("Button");
-                //String passcode = passcodeView.getText().toString();
-                //mPassRef.setValue(passcode);
-                //GameObject artist = new GameObject(id);
-                //mRootRef.child(id).setValue(artist);
-
-
 
             }
         });
 
-        mConditionRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text= dataSnapshot.getValue(String.class);
-                view.setText(text);
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
+
+
 }

@@ -113,9 +113,8 @@ public class aList extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.title);
         textView.setText(username);
-        //test ArrayAdapter
         ArrayList<String> str = new ArrayList<String>();
-        initializeUI(str); //ArrayAdapter doesn't work
+        initializeUI(str);
 
 
     }
@@ -215,3 +214,4 @@ public class aList extends AppCompatActivity {
         leaveGame(username);
     }
 }
+

@@ -1,4 +1,4 @@
-package com.example.soymilk.myapplication;
+package com.example.soymilk.myapplication.models;
 
 import java.util.Arrays;
 import java.util.List;
