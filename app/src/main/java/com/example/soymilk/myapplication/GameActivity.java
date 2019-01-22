@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class GameActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener, GiveFragment.OnFragmentInteractionListener {
+public class GameActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     GamePagerAdapter adapter;
@@ -27,17 +27,7 @@ public class GameActivity extends AppCompatActivity implements ListFragment.OnFr
 
     }
 
-    // Connection to ListFragment
-    @Override
-    public void onListFragmentInteraction() {
 
-    }
-
-    // Connection to GiveFragment
-    @Override
-    public void onSharedFragmentInteraction() {
-
-    }
 
 
     // Inner class for PagerAdapter

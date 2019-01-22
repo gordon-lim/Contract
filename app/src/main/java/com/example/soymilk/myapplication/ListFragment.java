@@ -25,14 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListFragment extends Fragment {
 
     // the fragment initialization parameters
@@ -47,13 +39,12 @@ public class ListFragment extends Fragment {
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
-    private OnFragmentInteractionListener mListener;
+
 
     public ListFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ListFragment newInstance(String username, String password) {
         ListFragment fragment = new ListFragment();
         // Supply input params as arguments
@@ -157,39 +148,10 @@ public class ListFragment extends Fragment {
             }
         });
 
-
-
-
-
-
         return rootView;
 
     }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-
-        void onListFragmentInteraction();
-    }
-
+    
     private void initializeUI (final ArrayList<String> listOfItems) {
 
         // Find a reference to the {@link ListView} in the layout

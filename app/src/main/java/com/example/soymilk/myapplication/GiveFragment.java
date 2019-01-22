@@ -19,14 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GiveFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GiveFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class GiveFragment extends Fragment {
 
     ArrayAdapter<String> adapter;
@@ -54,10 +47,6 @@ public class GiveFragment extends Fragment {
         adapter.addAll(listOfItems);
     }
 
-
-
-
-        private OnFragmentInteractionListener mListener;
 
     public GiveFragment() {
         // Required empty public constructor
@@ -100,27 +89,4 @@ public class GiveFragment extends Fragment {
     }
 
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-
-        void onSharedFragmentInteraction();
-    }
 }

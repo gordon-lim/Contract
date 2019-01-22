@@ -125,13 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void testMethodforTestButton(View view){
-        globalPass = "chicken";
-        GameObject game1 = new GameObject("chicken");
-        mRootRef.child("chicken").setValue(game1);
-        Intent openShared = new Intent(MainActivity.this, sharedScreen.class);
-        startActivity(openShared);
-    }
 
     @Override
     protected void onStart() {
