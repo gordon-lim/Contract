@@ -187,7 +187,7 @@ public class ListFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
 
-        void onFragmentInteraction();
+        void onListFragmentInteraction();
     }
 
     private void initializeUI (final ArrayList<String> listOfItems) {

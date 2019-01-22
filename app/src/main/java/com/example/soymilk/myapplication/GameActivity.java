@@ -3,12 +3,11 @@ package com.example.soymilk.myapplication;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class GameActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener {
+public class GameActivity extends AppCompatActivity implements ListFragment.OnFragmentInteractionListener, GiveFragment.OnFragmentInteractionListener {
 
     ViewPager viewPager;
     GamePagerAdapter adapter;
@@ -28,11 +27,18 @@ public class GameActivity extends AppCompatActivity implements ListFragment.OnFr
 
     }
 
-    // Communication channel with ListFragment
+    // Connection to ListFragment
     @Override
-    public void onFragmentInteraction() {
+    public void onListFragmentInteraction() {
 
     }
+
+    // Connection to GiveFragment
+    @Override
+    public void onSharedFragmentInteraction() {
+
+    }
+
 
     // Inner class for PagerAdapter
 
@@ -47,6 +53,8 @@ public class GameActivity extends AppCompatActivity implements ListFragment.OnFr
             switch (position) {
                 case 0:
                     return new ListFragment().newInstance(username, password);
+                case 1:
+                    return  new GiveFragment().newInstance();
                 default:
                     return null;
 
@@ -57,7 +65,7 @@ public class GameActivity extends AppCompatActivity implements ListFragment.OnFr
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
 
         // TODO: Understand this code

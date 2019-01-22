@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".GiveFragment">
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/topLists"
-        android:layout_weight="1"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/editButtons">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/topLists"
+            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:layout_above="@id/editButtons">
 
 
 
@@ -27,27 +33,27 @@
                 android:gravity="center"
                 />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="horizontal"
-            >
-
-            <Button
-                android:id="@+id/myCheck"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SIGN" />
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                >
 
-            <Button
-                android:id="@+id/otherCheck"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="BOOLEAN" />
-        </LinearLayout>
+                <Button
+                    android:id="@+id/myCheck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SIGN" />
+
+                <Button
+                    android:id="@+id/otherCheck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="BOOLEAN" />
+            </LinearLayout>
 
             <ListView
                 android:layout_width="match_parent"
@@ -59,15 +65,15 @@
         </LinearLayout>
 
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/editButtons"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/editButtons"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true">
 
 
             <EditText
@@ -99,4 +105,6 @@
         </LinearLayout>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>
