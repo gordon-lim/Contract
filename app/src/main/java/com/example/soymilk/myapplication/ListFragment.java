@@ -27,6 +27,25 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
+    // Lesson learnt:
+
+    /* (username=="userA") ==> false
+
+    String fooString1 = new String("foo");
+    String fooString2 = new String("foo");
+
+    // Evaluates to false
+    fooString1 == fooString2;
+
+    // Evaluates to true
+    fooString1.equals(fooString2);
+
+    // Evaluates to true, because Java uses the same object
+    "bar" == "bar";
+
+     */
+
+
     // the fragment initialization parameters
     private static final String PASSWORD = "password";
     private static final String USERNAME = "username";
@@ -183,7 +202,7 @@ public class ListFragment extends Fragment {
 
         //Then check other user
 
-        String othername = username=="userA" ? "userB" : "userA";
+        String othername = (username.equals("userA")) ? "userB" : "userA";
 
         mRootRef.child(mPassword).child(othername).child("isTaken").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

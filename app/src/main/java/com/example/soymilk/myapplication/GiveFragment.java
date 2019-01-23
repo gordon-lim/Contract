@@ -1,6 +1,7 @@
 package com.example.soymilk.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,12 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -31,9 +35,15 @@ public class GiveFragment extends Fragment {
 
     Button mAddButton;
     EditText editText;
+    TextView displayName;
 
     String mUsername;
+    String mOthername;
     String mPassword;
+    boolean otherEnded = false;
+    boolean userEnded = false;
+
+    ArrayList<String> giveArrayList;
 
     ArrayAdapter<String> adapter;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -58,7 +68,7 @@ public class GiveFragment extends Fragment {
                 mGiveRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ArrayList<String> giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
+                        giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
                         giveArrayList.remove(position);
                         mGiveRef.setValue(giveArrayList);
                     }
@@ -105,19 +115,30 @@ public class GiveFragment extends Fragment {
 
         Bundle args = getArguments();
         mUsername = args.getString(USERNAME);
+        mOthername = (mUsername.equals("userA")) ? "userB" : "userA";
         mPassword = args.getString(PASSWORD);
         mGiveRef = mRootRef.child(mPassword).child(mUsername).child("myGive");
 
         ArrayList<String> str = new ArrayList<String>();
         initializeUI(str);
 
-        // When there's change to Firebase, update UI.
-        mGiveRef.addValueEventListener(new ValueEventListener() {
+        // When I end, update local variable
+
+        mRootRef.child(mPassword).child(mUsername).child("Ended").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ArrayList<String> giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
-                if (giveArrayList != null)
-                    updateUI(giveArrayList);
+                userEnded = dataSnapshot.getValue(Boolean.class);
+                //if both ended, open result
+                if(otherEnded && userEnded){
+                    // Intent to open results Activity
+                    Intent openResults = new Intent(getActivity(), ResultsActivity.class);
+                    startActivity(openResults);
+
+                    // else if only other ended
+                }else if(userEnded){
+                    // if true, setText waiting for other
+                }
+
             }
 
             @Override
@@ -125,6 +146,52 @@ public class GiveFragment extends Fragment {
 
             }
         });
+
+        // When other person end, update local variable
+        mRootRef.child(mPassword).child(mOthername).child("Ended").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                otherEnded = dataSnapshot.getValue(Boolean.class);
+                //if both ended, open result
+                if(otherEnded && userEnded){
+                    // Intent to open results Activity
+                    Intent openResults = new Intent(getActivity(), ResultsActivity.class);
+                    startActivity(openResults);
+
+                // else if only other ended
+                }else if(otherEnded){
+                    // if true, setText other player waiting for you
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        // When there's change to Firebase, update UI.
+        mGiveRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
+                if (giveArrayList != null)
+                    updateUI(giveArrayList);
+                else{
+                    updateUI(new ArrayList<String>());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        displayName = (TextView) rootView.findViewById(R.id.user);
+        displayName.setText(mUsername);
 
         mAddButton = (Button) rootView.findViewById(R.id.add);
         editText = (EditText) rootView.findViewById(R.id.enterItem);
@@ -144,40 +211,62 @@ public class GiveFragment extends Fragment {
 
     public void add(final String itemAdded) {
 
+        mGiveRef = mRootRef.child(mPassword).child(mUsername).child("myGive");
+
+
         mGiveRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Welp apparently I shouldn't be using Lists in Firebase db
-                // Here's a less efficient work around
+                boolean GiveListExist = dataSnapshot.exists();
 
-                // Get the current list on the database
-                ArrayList<String> giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
+                // If mGiveRef exists, append to existing List
+                if(GiveListExist){
+
+                    // Get the current list on the database
+                    giveArrayList = (ArrayList<String>) dataSnapshot.getValue(); // CRASH HERE, COS NULL
+
+                }
+                // Else, add to new List
+                else{
+                    giveArrayList = new ArrayList<String>();
+                }
                 // Add the new item
                 giveArrayList.add(itemAdded);
                 // Send it back up
                 mGiveRef.setValue(giveArrayList);
-
                 // My ValueEventListener will trigger...Sending the list backdown and updating the UI
-
-                // Clear editText
-                editText.setText("");
-
-                // Hides keyboard
-                InputMethodManager inputManager = (InputMethodManager)
-                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
-
-            }
+            } // End of OnDataChange
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        }); // End of Listener
+
+        // Hides keyboard
+        InputMethodManager inputManager = (InputMethodManager)
+                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+
+        // Clears editText
+
+        editText.setText("");
 
     }
+
+    // Method to sign off on one side
+
+    public void ended(){
+
+        // Set Ended on Firebase to true
+        mRootRef.child(mPassword).child(mUsername).child("Ended").setValue(true);
+
+    }
+
+
+
 
 
 }
