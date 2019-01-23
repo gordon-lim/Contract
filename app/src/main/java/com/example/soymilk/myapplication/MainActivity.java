@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        view = (TextView)findViewById(R.id.view);
         joinButton = (Button)findViewById(R.id.joinButton);
         createButton = (Button)findViewById(R.id.createButton);
         passcodeView = (EditText)findViewById(R.id.editText);

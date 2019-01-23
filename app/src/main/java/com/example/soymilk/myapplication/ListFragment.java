@@ -151,7 +151,7 @@ public class ListFragment extends Fragment {
         return rootView;
 
     }
-    
+
     private void initializeUI (final ArrayList<String> listOfItems) {
 
         // Find a reference to the {@link ListView} in the layout
@@ -176,6 +176,8 @@ public class ListFragment extends Fragment {
         //First leave yourself
         mRootRef.child(mPassword).child(username).child("isTaken").setValue(false);
         mRootRef.child(mPassword).child(username).child("isEnded").setValue(false);
+
+        // The following will delete the List objects because Firebase cannot have an empty List
         mRootRef.child(mPassword).child(username).child("myList").setValue(new ArrayList<String>());
         mRootRef.child(mPassword).child(username).child("myGive").setValue(new ArrayList<String>());
 

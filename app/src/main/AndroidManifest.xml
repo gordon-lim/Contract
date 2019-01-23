@@ -16,8 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".aList" />
-        <activity android:name=".sharedScreen" />
         <activity android:name=".GameActivity"></activity>
     </application>
 

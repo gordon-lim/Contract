@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
                 case 0:
                     return new ListFragment().newInstance(username, password);
                 case 1:
-                    return  new GiveFragment().newInstance();
+                    return  new GiveFragment().newInstance(username, password);
                 default:
                     return null;
 
