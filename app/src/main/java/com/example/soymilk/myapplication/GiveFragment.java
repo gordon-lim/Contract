@@ -160,6 +160,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
                 //if both ended, open result
                 if(otherEnded && userEnded){
                     // Intent to open results Activity
+                    checkOther();
                     Intent openResults = new Intent(getActivity(), ResultsActivity.class);
                     openResults.putExtra(USERNAME, mUsername);
                     startActivity(openResults);

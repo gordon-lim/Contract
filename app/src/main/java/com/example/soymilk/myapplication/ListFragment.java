@@ -190,38 +190,6 @@ public class ListFragment extends Fragment {
         adapter.addAll(listOfItems);
     }
 
-    private void leaveGame (String username) {
 
-        //First leave yourself
-        mRootRef.child(mPassword).child(username).child("isTaken").setValue(false);
-        mRootRef.child(mPassword).child(username).child("isEnded").setValue(false);
 
-        // The following will delete the List objects because Firebase cannot have an empty List
-        mRootRef.child(mPassword).child(username).child("myList").setValue(new ArrayList<String>());
-        mRootRef.child(mPassword).child(username).child("myGive").setValue(new ArrayList<String>());
-
-        //Then check other user
-
-        String othername = (username.equals("userA")) ? "userB" : "userA";
-
-        mRootRef.child(mPassword).child(othername).child("isTaken").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue(Boolean.class) == false){
-                    mRootRef.child(mPassword).removeValue();
-                }
-            };
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        leaveGame(mUsername);
-    }
 }
