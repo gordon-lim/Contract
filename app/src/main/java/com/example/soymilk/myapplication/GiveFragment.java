@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +29,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class GiveFragment extends Fragment {
+public class GiveFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
     // the fragment initialization parameters
     private static final String PASSWORD = "password";
@@ -36,6 +38,8 @@ public class GiveFragment extends Fragment {
     Button mAddButton;
     EditText editText;
     TextView displayName;
+    CheckBox aCheckbox;
+    CheckBox bCheckbox;
 
     String mUsername;
     String mOthername;
@@ -161,6 +165,13 @@ public class GiveFragment extends Fragment {
                 // else if only other ended
                 }else if(otherEnded){
                     // if true, setText other player waiting for you
+                    // also, set other checked
+                    checkOther();
+
+                }
+                // if false, revert
+                else{
+                    uncheckOther();
                 }
 
             }
@@ -192,6 +203,20 @@ public class GiveFragment extends Fragment {
 
         displayName = (TextView) rootView.findViewById(R.id.user);
         displayName.setText(mUsername);
+        aCheckbox = (CheckBox) rootView.findViewById(R.id.Aready);
+        bCheckbox = (CheckBox) rootView.findViewById(R.id.Bready);
+
+
+        // Disable other player's CheckBox from the get go
+        // And set listener to own
+        if(mUsername.equals("userA")){
+            bCheckbox.setEnabled(false);
+            aCheckbox.setOnCheckedChangeListener(this);
+        }else{
+            aCheckbox.setEnabled(false);
+            bCheckbox.setOnCheckedChangeListener(this);
+        }
+
 
         mAddButton = (Button) rootView.findViewById(R.id.add);
         editText = (EditText) rootView.findViewById(R.id.enterItem);
@@ -256,17 +281,35 @@ public class GiveFragment extends Fragment {
 
     }
 
-    // Method to sign off on one side
 
-    public void ended(){
-
-        // Set Ended on Firebase to true
-        mRootRef.child(mPassword).child(mUsername).child("Ended").setValue(true);
-
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked){
+            mRootRef.child(mPassword).child(mUsername).child("Ended").setValue(true);
+        }else{
+            mRootRef.child(mPassword).child(mUsername).child("Ended").setValue(false);
+        }
     }
 
+    // Set other player checkbox true after he checked
+    public void checkOther(){
+        if(mOthername.equals("userA")){
+            aCheckbox.setChecked(true);
+        }else{
+            bCheckbox.setChecked(true);
+        }
+    }
+
+    // Set other player checkbox false after he unchecked
+    public void uncheckOther(){
+        if(mOthername.equals("userA")){
+            aCheckbox.setChecked(false);
+        }else{
+            bCheckbox.setChecked(false);
+        }
 
 
+    }
 
 
 }
