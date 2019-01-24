@@ -8,6 +8,7 @@ public class User {
     public boolean isTaken = false;
     public List<String> myList = Arrays.asList("rocks","my","world");
     public List<String> myGive = Arrays.asList("rocks","my","world");
+    public int score = 0;
 
 
     public User(){}

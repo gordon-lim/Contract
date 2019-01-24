@@ -136,6 +136,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
                 if(otherEnded && userEnded){
                     // Intent to open results Activity
                     Intent openResults = new Intent(getActivity(), ResultsActivity.class);
+                    openResults.putExtra(USERNAME, mUsername);
                     startActivity(openResults);
 
                     // else if only other ended
@@ -160,6 +161,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
                 if(otherEnded && userEnded){
                     // Intent to open results Activity
                     Intent openResults = new Intent(getActivity(), ResultsActivity.class);
+                    openResults.putExtra(USERNAME, mUsername);
                     startActivity(openResults);
 
                 // else if only other ended
@@ -248,7 +250,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
                 if(GiveListExist){
 
                     // Get the current list on the database
-                    giveArrayList = (ArrayList<String>) dataSnapshot.getValue(); // CRASH HERE, COS NULL
+                    giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
 
                 }
                 // Else, add to new List
