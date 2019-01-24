@@ -1,4 +1,4 @@
-# Negotiation
+# Contract
 A 2-player game app that gets player bargaining over objectives.
 
 KNOWN BUGS:
