@@ -28,6 +28,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 
 public class GiveFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
 
@@ -40,6 +42,12 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
     TextView displayName;
     CheckBox aCheckbox;
     CheckBox bCheckbox;
+
+    // Listeners
+
+    private ValueEventListener mListener2;
+    private ValueEventListener mListener3;
+    private ValueEventListener mListener4;
 
     String mUsername;
     String mOthername;
@@ -92,6 +100,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
 
         adapter.clear();
         adapter.addAll(listOfItems);
+
     }
 
 
@@ -128,7 +137,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
 
         // When I end, update local variable
 
-        mRootRef.child(mPassword).child(mUsername).child("Ended").addValueEventListener(new ValueEventListener() {
+        mListener2 = mRootRef.child(mPassword).child(mUsername).child("Ended").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userEnded = dataSnapshot.getValue(Boolean.class);
@@ -153,7 +162,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
         });
 
         // When other person end, update local variable
-        mRootRef.child(mPassword).child(mOthername).child("Ended").addValueEventListener(new ValueEventListener() {
+        mListener3 = mRootRef.child(mPassword).child(mOthername).child("Ended").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 otherEnded = dataSnapshot.getValue(Boolean.class);
@@ -187,7 +196,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
 
 
         // When there's change to Firebase, update UI.
-        mGiveRef.addValueEventListener(new ValueEventListener() {
+        mListener4 = mGiveRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 giveArrayList = (ArrayList<String>) dataSnapshot.getValue();
@@ -315,4 +324,12 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
     }
 
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        mGiveRef.removeEventListener(mListener4);
+        mRootRef.child(mPassword).child(mOthername).child("Ended").removeEventListener(mListener3);
+        mRootRef.child(mPassword).child(mUsername).child("Ended").removeEventListener(mListener2);
+
+    }
 }

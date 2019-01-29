@@ -16,11 +16,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+
 public class ResultsActivity extends AppCompatActivity {
 
     // Goal:
     // If userA, compute A list and B give
     // If userB, compute B list and A give
+
+    private static int FUZZY_CUT_OFF = 70;
 
     TextView scoreView;
     TextView resultView;
@@ -89,7 +93,7 @@ public class ResultsActivity extends AppCompatActivity {
         endGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // leaveGame();
+                leaveGame();
                 startActivity(new Intent(ResultsActivity.this, MainActivity.class));
             }
         });
@@ -146,13 +150,20 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     // Method to compare both lists
-    public int computeResult(ArrayList<String> list1, ArrayList<String> list2) {
+    public int computeResult(ArrayList<String> hardcodedList, ArrayList<String> inputList) {
         int score = 0;
-        for (String s : list1) {
-            for (String s2 : list2) {
-                if (s.equals(s2)) {
+        for (String s : hardcodedList) {
+            for (String s2 : inputList) {
+
+                // get closest match with hardcodedList
+                if (FuzzySearch.ratio(s, s2) > FUZZY_CUT_OFF) {
                     score++;
                 }
+
+                // .equals() uses exact matching
+                /* if (s.equals(s2)) {
+                    score++;
+                } */
             }
         }
         return score;

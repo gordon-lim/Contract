@@ -55,6 +55,7 @@ public class ListFragment extends Fragment {
     String mPassword;
     ArrayAdapter<String> adapter;
     ListView itemsListView;
+    private ValueEventListener mListener;
 
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -148,7 +149,7 @@ public class ListFragment extends Fragment {
 
         mRootRef.child(mPassword).child(mUsername).child("myList").setValue(myList);
 
-        mRootRef.child(mPassword).child(mUsername).child("myList").addValueEventListener(new ValueEventListener() {
+        mListener = mRootRef.child(mPassword).child(mUsername).child("myList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //List aListFromFire = dataSnapshot.getValue(List.class); //problem with this
@@ -190,6 +191,9 @@ public class ListFragment extends Fragment {
         adapter.addAll(listOfItems);
     }
 
-
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        mRootRef.child(mPassword).child(mUsername).child("myList").removeEventListener(mListener);
+    }
 }
