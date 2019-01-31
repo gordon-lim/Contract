@@ -24,11 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-
-import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 
 public class GiveFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
@@ -68,7 +64,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
         // Find a reference to the {@link ListView} in the layout
         ListView itemsListView = (ListView) rootView.findViewById(R.id.giveList);
         // Create a new {@link ArrayAdapter} of earthquakes
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listOfItems);
+        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_layout, listOfItems);
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         itemsListView.setAdapter(adapter);
@@ -124,7 +120,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_shared, container, false);
+        rootView = inflater.inflate(R.layout.fragment_give, container, false);
 
         Bundle args = getArguments();
         mUsername = args.getString(USERNAME);
@@ -214,7 +210,7 @@ public class GiveFragment extends Fragment implements CompoundButton.OnCheckedCh
         });
 
         displayName = (TextView) rootView.findViewById(R.id.user);
-        displayName.setText(mUsername);
+        displayName.setText("I will give " + mOthername + " the following:");
         aCheckbox = (CheckBox) rootView.findViewById(R.id.Aready);
         bCheckbox = (CheckBox) rootView.findViewById(R.id.Bready);
 

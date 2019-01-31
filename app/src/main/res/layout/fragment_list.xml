@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".ListFragment">
 
 
@@ -19,11 +20,17 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textSize="30sp"
             android:gravity="center"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/typewriter_________royal200bold"
             android:text="Your List(User X)" />
 
         <ListView
             android:id="@+id/list_item"
+            android:layout_margin="30dp"
+            android:background="#ef9c0d"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

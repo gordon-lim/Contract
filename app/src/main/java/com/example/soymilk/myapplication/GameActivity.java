@@ -54,6 +54,8 @@ public class GameActivity extends AppCompatActivity {
                     return new ListFragment().newInstance(username, password);
                 case 1:
                     return new GiveFragment().newInstance(username, password);
+                case 2:
+                    return new GetFragment().newInstance(username, password);
                 default:
                     return null;
 
@@ -64,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         // TODO: Understand this code

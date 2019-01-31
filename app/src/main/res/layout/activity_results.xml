@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".ResultsActivity">
@@ -12,23 +13,39 @@
         android:id="@+id/win_or_lose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WIN or LOSE" />
+        android:textColor="#ff962c"
+        android:fontFamily="@font/typewriter_________royal200bold"
+        android:text="WIN"
+        android:textSize="140sp"/>
 
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3" />
+        android:textColor="#ffffff"
+        android:text="3"
+        android:fontFamily="@font/typewriter_________royal200bold"
+        android:textSize="140sp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="matching items" />
+        android:fontFamily="@font/typewriter_________royal200bold"
+        android:text="matching items"
+        android:textColor="#ff962c"
+        android:textSize="25sp"
+         />
 
     <Button
         android:id="@+id/finish"
         android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#ab0000"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/typewriter_________royal200bold"
         android:text="FINISH" />
 
 </LinearLayout>

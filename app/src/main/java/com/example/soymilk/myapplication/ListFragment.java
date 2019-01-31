@@ -27,24 +27,6 @@ import java.util.List;
 
 public class ListFragment extends Fragment {
 
-    // Lesson learnt:
-
-    /* (username=="userA") ==> false
-
-    String fooString1 = new String("foo");
-    String fooString2 = new String("foo");
-
-    // Evaluates to false
-    fooString1 == fooString2;
-
-    // Evaluates to true
-    fooString1.equals(fooString2);
-
-    // Evaluates to true, because Java uses the same object
-    "bar" == "bar";
-
-     */
-
 
     // the fragment initialization parameters
     private static final String PASSWORD = "password";
@@ -57,8 +39,8 @@ public class ListFragment extends Fragment {
     ListView itemsListView;
     private ValueEventListener mListener;
 
+    // References
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-
 
 
     public ListFragment() {
@@ -87,11 +69,11 @@ public class ListFragment extends Fragment {
         rootView =  inflater.inflate(R.layout.fragment_list, container, false);
 
         TextView textView = (TextView) rootView.findViewById(R.id.title);
-        textView.setText(mUsername);
+        textView.setText("Your List (" + mUsername + ")");
         ArrayList<String> str = new ArrayList<String>();
         initializeUI(str);
 
-        // Create a List of 3 random items
+        // Create a List of 5 random items
         List<String> list = Arrays.asList(
                 "shawl",
                 "shovel",
@@ -145,7 +127,7 @@ public class ListFragment extends Fragment {
 
         Collections.shuffle(list);
 
-        final List myList = list.subList(0,3);
+        final List myList = list.subList(0,5);
 
         mRootRef.child(mPassword).child(mUsername).child("myList").setValue(myList);
 
@@ -178,7 +160,7 @@ public class ListFragment extends Fragment {
         ListView itemsListView = (ListView) rootView.findViewById(R.id.list_item);
         // Create a new {@link ArrayAdapter} of earthquakes
         adapter =
-                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listOfItems);
+                new ArrayAdapter<String>(getActivity(), R.layout.list_item_layout, listOfItems);
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         itemsListView.setAdapter(adapter);

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".GiveFragment">
 
     <RelativeLayout
@@ -30,30 +31,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="A to B"
+                android:text="I will give userB the following: "
+                android:fontFamily="@font/typewriter_________royal200bold"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
                 android:gravity="center"
                 />
 
             <LinearLayout
+                android:id="@+id/signatures"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <CheckBox
                     android:id="@+id/Bready"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="B sign" />
+                    android:buttonTint="#ef9c0d"
+                    android:fontFamily="@font/typewriter_________royal200bold"
+                    android:text="B sign"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
 
                 <CheckBox
                     android:id="@+id/Aready"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="A sign" />
+                    android:buttonTint="#ef9c0d"
+                    android:checked="false"
+                    android:fontFamily="@font/typewriter_________royal200bold"
+                    android:text="A sign"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -61,7 +74,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="#ef9c0d"
                 android:id="@+id/giveList"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
                 tools:text="list"
                 />
         </LinearLayout>
@@ -72,8 +90,9 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:id="@+id/editButtons"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:layout_alignParentBottom="true">
 
@@ -81,15 +100,26 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:id="@+id/enterItem"
-                android:hint="Enter item"/>
+                android:hint="Enter item"
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:shadowColor="#ff962c"
+                android:textColor="#ffffff"
+                android:textColorHint="#ec6b00"
+                android:backgroundTint="#ff962c"
+                android:fontFamily="@font/typewriter_________royal200bold"/>
 
             <Button
                 android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
+                android:textColor="#ffffff"
+                android:textSize="25sp"
+                android:fontFamily="@font/typewriter_________royal200bold"
+                android:background="#ab0000"
                 android:text="ADD" />
 
         </LinearLayout>
